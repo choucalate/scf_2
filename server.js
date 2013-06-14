@@ -2,7 +2,8 @@
 var connect = require('connect')
     , express = require('express')
     , io = require('socket.io')
-    , port = (process.env.PORT || 8081);
+    , port = (process.env.PORT || 8081)
+    , gcm = require('node-gcm');
 
 //Setup Express
 var server = express.createServer();
@@ -50,6 +51,20 @@ io.sockets.on('connection', function(socket){
   });
 });
 
+//setup node-gcm
+var message = new gcm.Message({
+  collapseKey: 'demo',
+  delayWhileIdle: true,
+  timeToLive: 3,
+  data: {
+     key1: 'message1',
+     key2: 'message2'
+  }
+});
+
+var sender = new gcm.Sender('AIzaSyDR-0G4LCM-Wc5Y80Kngt598SqdePVNTcY');
+var registrationIds =[];
+
 
 ///////////////////////////////////////////
 //              Routes                   //
@@ -70,11 +85,18 @@ server.get('/', function(req,res){
 });
 
 server.get('/:regid', function(req,res){
-  console.log("this regid: " + req.params.regid);
+  var registration = req.params.regid;
+  console.log("this regid: " + reqistration);
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify( {
-     regid: req.params.regid
+     regid: registration
   }));
+   registrationIds.push(registration); 
+  //send the gcm message - params = message-literal, regid array, no. of retries, callback
+  sender.send(message, registrationIds, 4, function (err, result) {
+    console.log(result);
+  });
+
   /*res.render('index.jade', {
     locals : { 
               title : 'Your Page Title'
