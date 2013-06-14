@@ -3,10 +3,34 @@ var connect = require('connect')
     , express = require('express')
     , io = require('socket.io')
     , port = (process.env.PORT || 8081)
+    , mongoose = require('mongoose')
+    , people = require('./models/people')
     , gcm = require('node-gcm');
 
 //Setup Express
 var server = express.createServer();
+
+var uristring = process.env.MONGOHQ_URL ||
+                process.env.MONGOLAB_URI ||
+                'mongodb://localhost/cfapp';
+
+//mongoose conneecting string logging to the out
+mongoose.connect(uristring, function(err, res) {
+  if(err) {
+     console.log("ERROR occurred connecting to :" + uristring + '. ' + err);
+  } else {
+     console.log("MONGO connected! here: " + uristring);
+
+  }
+});
+
+//the db connection on error or opened 
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback() {
+  console.log("MONGO open!");
+});
 server.configure(function(){
     server.set('views', __dirname + '/views');
     server.set('view options', { layout: false });
@@ -54,16 +78,14 @@ io.sockets.on('connection', function(socket){
 //setup node-gcm
 var message = new gcm.Message({
   collapseKey: 'demo',
-  delayWhileIdle: true,
-  timeToLive: 3,
+  timeToLive: 20,
   data: {
-     key1: 'message1',
-     key2: 'message2'
+     key1: 'COOL MESSAGE'
   }
 });
 
 var sender = new gcm.Sender('AIzaSyDR-0G4LCM-Wc5Y80Kngt598SqdePVNTcY');
-var registrationIds =[];
+//var registrationIds =[];
 
 
 ///////////////////////////////////////////
@@ -83,31 +105,68 @@ server.get('/', function(req,res){
             }
   });
 });
-
-server.get('/:regid', function(req,res){
+server.get('/ajax/trial', function(req, res) {
+  console.log("received: ");
+});
+server.get('/register/:regid', function(req,res){
+  var src = "GET REG ID";
   var registration = req.params.regid;
   console.log("this regid: " + registration);
   res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify( {
-     regid: registration
-  }));
-   registrationIds.push(registration); 
+  tempId = [registration];
   //send the gcm message - params = message-literal, regid array, no. of retries, callback
-  sender.send(message, registrationIds, 4, function (err, result) {
-    console.log(result);
+  sender.sendNoRetry(message, tempId, function (err, result) {
+    if(err)
+    {
+	console.log("error: " + err);
+	printErrorToRes(err, src, res);
+	return;
+    }
+    //save it to the peopleSchema
+    people.saveData(result, function(err, data){
+    	console.log("success: " + data);
+	printSuccToRes(data, src, res);
+    });
   });
-
-  /*res.render('index.jade', {
-    locals : { 
-              title : 'Your Page Title'
-             ,description: 'Your Page Description'
-             ,author: 'Your Name'
-             ,analyticssiteid: 'XXXXXXX' 
-	     ,regid: req.params.regid
-            }
-  });*/
 });
 
+server.get('/sendReq/:cf', function(req, res) {
+   var cmpsfel = req.params.cf;
+   //result must be in array format for the sender to iterate
+   campus.getCF(cmpsfel, function( err, result) {
+     if(err)
+     {
+	return console.log("error: " + err); 
+     }
+     //2 retries
+     sender.send(message, result, 2, function (err, result) {
+      if(err)
+      {
+	  console.log("error: " + err);
+	  printErrorToRes(err, src, res);
+	  return;
+      }
+      //save it to the peopleSchema
+      people.saveData(result, function(err, data){
+	  console.log("success: " + data);
+	  printSuccToRes(data, src, res);
+      });
+    });
+  });
+});
+
+function printSuccToRes(data, src, res) {  
+  res.end(JSON.stringify( {
+    result: data,
+    source: src
+   }));
+}
+function printErrorToRes(err, src,  res) {  
+  res.end(JSON.stringify( {
+    error:  err,
+    source: src
+   }));
+}
 //A Route for Creating a 500 Error (Useful to keep around)
 server.get('/500', function(req, res){
     throw new Error('This is a 500 Error');

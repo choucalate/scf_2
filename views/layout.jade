@@ -35,7 +35,17 @@ html.no-js(lang='en')
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
+        script
+          $(document).ready(function() {
+            $('#ajax').click(function() {
+              $.get('/ajax/trial', function(err, data) {
+                if(err) alert('err: ' + err);
+                else alert('sent: ' + data);
+              });
+            });
+          });
         //if lt IE 7
           script(defer, src='//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js')
           script(defer)
             window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})
+
