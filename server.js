@@ -86,7 +86,7 @@ server.get('/', function(req,res){
 
 server.get('/:regid', function(req,res){
   var registration = req.params.regid;
-  console.log("this regid: " + reqistration);
+  console.log("this regid: " + registration);
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify( {
      regid: registration
