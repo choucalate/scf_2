@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>SCF admin</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="stylesheets/bootstrap.css">
+        <style>
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        <link rel="stylesheet" href="stylesheets/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="stylesheets/main.css">
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="#">Admin Page</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="active"><a href="#">Home</a></li>
+                        </ul>
+                        <form class="navbar-form pull-right">
+                            <input class="span2" type="text" placeholder="Email">
+                            <input class="span2" type="password" placeholder="Password">
+                            <button type="submit" class="btn">Sign in</button>
+                        </form>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class = "row-fluid">
+               <div class= "span3 bs-docs-sidebar">
+                  <ul class ="nav nav-list bs-docs-sidenav affix">
+                      <li><a href="#global"><i class="icon-chevron-right"></i> Global styles</a></li>
+                      <li><a href="#gridSystem"><i class="icon-chevron-right"></i> Grid system</a></li>
+                      <li><a href="#fluidGridSystem"><i class="icon-chevron-right"></i> Fluid grid system</a></li>
+                      <li><a href="#layouts"><i class="icon-chevron-right"></i> Layouts</a></li>
+                      <li><a href="#responsive"><i class="icon-chevron-right"></i> Responsive design</a></li>
+                  </ul>
+               </div>
+               <div class ="span9">
+
+                <h3>Event Manager</h3>
+<form class="form-horizontal" method = "post">
+  <div class="control-group">
+    <label class="control-label" for="inputTitle">Title: </label>
+    <div class="controls">
+      <input type="text" id="inputEmail" placeholder="Event Title">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputDate">Date: </label>
+    <div class="controls">
+      <input type="date" id="inputPassword" placeholder="i.e. 4/1/13">
+    </div>
+  </div>
+<div class="control-group">
+
+    <label class="control-label" for="inputDate">Content: </label>
+    <div class="controls">
+<textarea rows="10" style = "width: 500px"></textarea>
+
+
+    </div>
+  </div>
+      <button type="submit" class="btn">Add Event</button>
+</div>
+</form>
+                 <!-- body content-->
+               </div>
+            </div>
+        </div>
+	    
+<!--<a href="#myModal" role="button" class="btn" data-toggle="modal" data-target = "#myModal">See Preview</a>-->
+<div class="modal hide fade" id="myModal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn">Close</a>
+    <a href="#" class="btn btn-primary">Save changes</a>
+  </div>
+</div>
+            <hr>
+
+<!--            <footer>
+                <p style="margin-left: 250px">&copy; Company 2012</p>
+            </footer>-->
+
+        </div> <!-- /container -->
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+
+        <script src="js/vendor/bootstrap.min.js"></script>
+
+        <script src="js/main.js"></script>
+
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>
+

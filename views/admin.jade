@@ -1,0 +1,89 @@
+extends layout
+
+block content
+    //if lt IE 7
+      p.chromeframe
+        | You are using an
+        strong outdated
+        | browser. Please
+        a(href='http://browsehappy.com/') upgrade your browser
+        | or
+        a(href='http://www.google.com/chromeframe/?redirect=true') activate Google Chrome Frame
+        | to improve your experience.
+    // This code is taken from http://twitter.github.com/bootstrap/examples/hero.html
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container
+          a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.brand(href='#') Admin Page
+          .nav-collapse.collapse
+            ul.nav
+              li.active
+                a(href='#') Home
+          // /.nav-collapse
+    .container-fluid
+      .row-fluid
+        .span3.bs-docs-sidebar
+          ul.nav.nav-list.bs-docs-sidenav.affix
+            li
+              a(href='#global')
+                i.icon-chevron-right
+                | Global styles
+            li
+              a(href='#gridSystem')
+                i.icon-chevron-right
+                | Grid system
+            li
+              a(href='#fluidGridSystem')
+                i.icon-chevron-right
+                | Fluid grid system
+            li
+              a(href='#layouts')
+                i.icon-chevron-right
+                | Layouts
+            li
+              a(href='#responsive')
+                i.icon-chevron-right
+                | Responsive design
+        .span9
+          h3 Event Manager
+          form.form-horizontal(method='post')
+            .control-group
+              label.control-label(for='inputTitle') Title: 
+              .controls
+                input#inputEmail(type='text', placeholder='Event Title')
+            .control-group
+              label.control-label(for='inputDate') Date: 
+              .controls
+                input#inputPassword(type='date', placeholder='i.e. 4/1/13')
+            .control-group
+              label.control-label(for='inputDate') Content: 
+              .controls
+                textarea(rows='10', style='width: 500px')
+            button.btn(type='submit') Add Event
+        // body content
+    // <a href="#myModal" role="button" class="btn" data-toggle="modal" data-target = "#myModal">See Preview</a>
+    #myModal.modal.hide.fade
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+        h3 Modal header
+      .modal-body
+        p One fine body…
+      .modal-footer
+        a.btn(href='#') Close
+        a.btn.btn-primary(href='#') Save changes
+    hr
+    // /container
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+    script
+      window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\\/script>')
+    script(src='js/vendor/bootstrap.min.js')
+    script(src='js/main.js')
+    script
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));

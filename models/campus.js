@@ -8,7 +8,7 @@
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
   , ObjectId = Schema.ObjectId
-  , People = require('./people');
+  , People = require('./people').schema;
 
 
 /**
@@ -17,16 +17,20 @@ var mongoose = require('mongoose')
 var cfSchema = new Schema({
     name: String,
     church: String,
-    people: [People]
+    people: [String] //matches valid people
 });
 
 
-/*model the current theWine schema as theWine document*/
 var campus = mongoose.model('cf', cfSchema);
 exports.cf = campus;
+exports.schema = cfSchema;
 
 /*this saves data */
 exports.saveData = function(data, cb) {
 
 }
 
+//the person should be a valid people schema
+exports.addUserToCF = function(person, cb) {
+  
+}

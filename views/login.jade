@@ -1,0 +1,94 @@
+!!! 5
+html(lang='en-US')
+  head
+    meta(charset='utf-8')
+    title Social Navigation
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js', type='text/javascript')
+    //
+      NOTE: THESE ARE PROPERTY OF CODEPEN USER MARCO BIERDARMANN
+               from this webpage: http://codepen.io/m412c0/details/dsbFy
+    link(rel='stylesheet', type='text/css', href='/css/login.css')
+    //
+            <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+            <link href="/css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    style
+      body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+      }
+    link(rel='stylesheet', href='/css/bootstrap-responsive.css')
+    link(rel='stylesheet', href='/css/main.css')
+    script(src='/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js')
+    //if lt IE 9
+      script(src='http://html5shiv.googlecode.com/svn/trunk/html5.js')
+  body
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container(style='')
+          a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.brand(href='#') SCF
+          .nav-collapse.collapse
+            ul.nav
+              li.active
+                a(href='#') Admin
+              li
+                a(href='#about') About
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown')
+                  | Media
+                  b.caret
+                ul.dropdown-menu
+                  li.nav-header Check out our
+                  li
+                    a(href='#') Blog
+                  li
+                    a(href='pictures.html') Pictures
+                  li
+                    a(href='#') Videos
+              li
+                a(href='#contact') Contact
+          // /.nav-collapse
+    #login-form
+      h1 Login
+      fieldset
+        form(action='/web/register', method='post')
+          input(type='email', name = 'email', required='required', value='Email', onblur='if(this.value=="")this.value="Email"', onfocus='if(this.value=="Email")this.value="" ')
+          // JS because of IE support; better: placeholder="Email"
+          input(type='password', name='password', required='required', value='Password', onblur='if(this.value=="")this.value="Password"', onfocus='if(this.value=="Password")this.value="" ')
+          // JS because of IE support; better: placeholder="Password"
+          input(type='text', name='first', required='required', value='First Name', onblur='if(this.value=="")this.value="First Name"', onfocus='if(this.value=="First Name")this.value="" ')
+          // JS because of IE support; better: placeholder="First Name"
+          input(type='text', name='last', required='required', value='Last Name', onblur='if(this.value=="")this.value="Last Name"', onfocus='if(this.value=="Last Name")this.value="" ')
+          // JS because of IE support; better: placeholder="Password"
+          input(type='tel', name ='phone', pattern='[0-9]{3} [0-9]{3} [0-9]{4}', value='Phone Format: ### ### ####', onblur='if(this.value=="")this.value="Phone Format: ### ### ####"', onfocus='if(this.value == "Phone Format: ### ### ####") this.value=""')
+          select(name='campus')
+             option(value='SCF') SCF
+             option(value='other') other
+          //.btn-group(name='campus')
+          //  button.btn.dropdown-toggle(data-toggle='dropdown')
+          //    | Campus Fellowship
+          //    span.caret
+          //  ul.dropdown-menu
+          //    li
+          //      a(href='#') SCF
+          //.clearfix
+          //  p
+          //    a#register(href='#Register') Register?
+          input(type='submit', value='Login')
+    // end login-form
+  script(src='/js/vendor/bootstrap.min.js')
+  script(src='/js/main.js')
+  script(type='text/javascript')
+    $(document).ready(function() {
+    $('#register').click(function() {
+    $('#login-form').animate({"height": "150%"}, "slow");
+    });
+    $('.dropdown-menu li a').click(function() {
+    $(".btn:first-child").text($(this).text());
+    $(".btn:first-child").val($(this).text());
+    });
+    });

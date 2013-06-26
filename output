@@ -1,0 +1,4 @@
+   [36minfo  -[39m socket.io started
+Listening on http://0.0.0.0:8081
+MONGO open!
+MONGO connected! here: mongodb://localhost/cfapplication
